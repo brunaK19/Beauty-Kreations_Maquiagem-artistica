@@ -1,4 +1,4 @@
-<img src="public/assets/img/iniciais.png" style="height:300px;">
+<img src="Beauty Kreations - WebSite/public/assets/img/iniciais.png" style="height:300px;">
 
 # Beauty Kreations
 
