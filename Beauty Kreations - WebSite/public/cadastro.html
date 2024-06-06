@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="../public/css/style.css">
+</head>
+
+<body class="login" style="background-image:  url('../public/assets/img/background.png');">
+    <div class="content">
+        <a href="index.html" class="voltar">voltar</a>
+        <div class="forms">
+            <div class="form">
+                <img src="../public/assets/img/cadastro.png" alt="" style="height: 35vh;width: 25vw; margin-top: -5vh;">
+
+                <span>Nome</span>
+                <input type="name" id="ipt_nome">
+
+                <span>E-mail</span>
+                <input type="email" id="ipt_email">
+
+                <span>Senha</span>
+                <input type="password" id="ipt_senha">
+
+                <span>Confirmar senha</span>
+                <input type="password" id="ipt_confirmaSenha">
+
+
+                <a href="login.html" class="link">Já tem login? Entre aqui</a>
+
+                <button onclick="cadastrar()">cadastrar</button>
+
+                <div id="mensagem_erro" style="margin-top: 2vh;"></div>
+            </div>
+        </div>
+        <div class="footer" id="footer">
+            <div class="redes">
+                <ul>
+                    <li><img src="../public/assets/img/instagram.png" alt=""><span>@BK_make</span></li>
+                    <li><img src="../public/assets/img/facebook.png" alt=""><span>Beauty Kreations</span></li>
+                    <li><img src="../public/assets/img/twitter.png" alt=""><span>BK_beauty</span></li>
+                </ul>
+                <img src="../public/assets/img/logo.png" alt="">
+                <ul>
+                    <li><img src="../public/assets/img/telephone.png" alt=""><span>11 99758-4966</span></li>
+                    <li><img src="../public/assets/img/email.png" alt=""><span>beautyKreations@email.com</span></li>
+                </ul>
+            </div>
+            <p class="right">BK©2024</p>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    function cadastrar() {
+
+        //Recupere o valor da nova input pelo nome do id
+        // Agora vá para o método fetch logo abaixo
+        var nomeVar = ipt_nome.value;
+        var emailVar = ipt_email.value;
+        var senhaVar = ipt_senha.value;
+        var confirmacaoSenhaVar = ipt_confirmaSenha.value;
+        if (
+            nomeVar == "" ||
+            emailVar == "" ||
+            senhaVar == "" ||
+            confirmacaoSenhaVar == ""
+        ) {
+            mensagem_erro.innerHTML =
+                "Preencha os campos";
+            return false;
+
+        } else if (senhaVar.length < 8) {
+            mensagem_erro.innerHTML = "A senha deve ter pelo menos 8 caracteres.";
+
+            return false;
+        } else if (senhaVar !== confirmacaoSenhaVar) {
+            mensagem_erro.innerHTML = "As senhas não correspondem.";
+
+            return false;
+        } else if (!validarEmail(emailVar)) {
+            mensagem_erro.innerHTML = "Por favor, insira um e-mail válido.";
+            return false;
+        } else {
+
+            data = {
+                nomeServer: nomeVar,
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            }
+
+            fetch("http://localhost:3333/usuarios/cadastrar", {
+                method: "POST",
+                body: JSON.stringify(data),
+                headers: { "Content-type": "application/json; charset=utf-8" }
+
+            })
+                .then(() => {
+                    console.log("Usuario criado")
+                    window.location = "./enquete.html";
+
+                })
+                .catch(error => console.error(error))
+
+
+        }
+
+    }
+
+    function validarEmail(email) {
+            var arroba = -1;
+            var ponto = -1;
+
+            for (var i = 0; i < email.length; i++) {
+                if (email[i] === '@') {
+                    arroba = i;
+                } else if (email[i] === '.') {
+                    ponto = i;
+                }
+            }
+
+            // Verificar se há pelo menos um '@' e um '.' e se o '.' vem depois do '@'
+            return arroba > 0 && ponto > arroba + 1 && ponto < email.length - 1;
+        }
+
+</script>

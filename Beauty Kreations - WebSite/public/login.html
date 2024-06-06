@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="../public/css/style.css">
+    <link rel="stylesheet" href="../public/js/sessao.js">
+</head>
+
+<body class="login" style="background-image:  url('../public/assets/img/background.png');" onload="validarSessao()">
+    <div class="content">
+        <a href="index.html" class="voltar">voltar</a>
+        <div class="forms">
+            <div class="form">
+                <img src="../public/assets/img/login.png" alt="">
+                <span>E-mail</span>
+                <input type="email" id="email_input">
+
+                <span>Senha</span>
+                <input type="password" id="senha_input">
+                <a href="cadastro.html" class="link">Não tem cadatro? Cadastre-se aqui</a>
+
+                <button onclick="entrar()">entrar</button>
+
+
+                <div id="mensagem_erro" style="margin-top: 2vh;"></div>
+            </div>
+        </div>
+        <div class="footer" id="footer">
+            <div class="redes">
+                <ul>
+                    <li><img src="../public/assets/img/instagram.png" alt=""><span>@BK_make</span></li>
+                    <li><img src="../public/assets/img/facebook.png" alt=""><span>Beauty Kreations</span></li>
+                    <li><img src="../public/assets/img/twitter.png" alt=""><span>BK_beauty</span></li>
+                </ul>
+                <img src="../public/assets/img/logo.png" alt="">
+                <ul>
+                    <li><img src="../public/assets/img/telephone.png" alt=""><span>11 99758-4966</span></li>
+                    <li><img src="../public/assets/img/email.png" alt=""><span>beautyKreations@email.com</span></li>
+                </ul>
+            </div>
+            <p class="right">BK©2024</p>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+
+    function entrar() {
+        var emailVar = email_input.value;
+        var senhaVar = senha_input.value;
+
+        if (
+            emailVar == "" ||
+            senhaVar == ""
+        ) {
+            mensagem_erro.innerHTML =
+                "Preencha os campos";
+            return false;
+
+        } else {
+
+            fetch("http://localhost:3333/usuarios/autenticar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    emailServer: emailVar,
+                    senhaServer: senhaVar
+                })
+            }).then(function (resposta) {
+                console.log("ESTOU NO THEN DO entrar()!")
+
+                if (resposta.ok) {
+                    console.log(resposta);
+
+                    resposta.json().then(json => {
+                        sessionStorage.EMAIL_USUARIO = json.email;
+                        sessionStorage.NOME_USUARIO = json.nome;
+                        sessionStorage.ID_USUARIO = json.idUsuario;
+                        window.location = "./dashboard.html";
+                    });
+
+                } else {
+
+                    console.log("Houve um erro ao tentar realizar o login!");
+
+                    resposta.text().then(texto => {
+                        console.error(texto);
+                    });
+                }
+
+            }).catch(function (erro) {
+                console.log(erro);
+            })
+
+            return false;
+
+        }
+    }
+
+</script>

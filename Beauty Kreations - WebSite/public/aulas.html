@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../public/css/style.css">
+    <title>Aulas</title>
+</head>
+
+<body style="background-image:  url('../public/assets/img/background.png');">
+    <div class="content">
+        <div class="dashboard">
+            <div class="menuLateral">
+                <img src="../public/assets/img/logo.png" alt="">
+                <ul>
+                    <li><a href="./dashboard.html">Dashboard</a></li>
+                    <li><a href="./aulas.html" style="color: rgb(32, 6, 56);font-weight: bold;">Aulas</a></li>
+                    
+                </ul>
+
+                <a href="./index.html" class="sair" onclick="limparSessao()">Sair</a>
+            </div>
+            <div class="centro">
+                <div class="niveis">
+                    <span>Selecione seu nível:</span>
+                    <select name="niveis" id="slct_niveis">
+                        <option value="#">Níveis</option>
+                        <option value="iniciante">Iniciante</option>
+                        <option value="intermediario">Intermediário</option>
+                        <option value="avancado">Avançado</option>
+                    </select>
+
+                    <button onclick="produtosNecessarios()">Assistir aulas</button>
+
+                    <div class="produtos" id="produtos" style="display: none;">
+                        <div id="valores">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="iniciante" id="iniciante" style="display: none;">
+                    <div>
+                        <video width="320" height="180" controls="controls"
+                            src="../public/videos/"></video>
+                        <p>Maquiagem Artística FÁCIL para iniciantes <br>
+                            Por Hellen Shawanny 
+                            no Youtube</p>
+                    </div>
+
+                    <div>
+                        <video width="320" height="180" controls="controls"
+                            src="../public/videos/"></video>
+                        <p>MAKE DE FOGO FÁCIL E RÁPIDO PARA FAZER - MAQUIAGEM ARTÍSTICA <br>
+                            Por Tay Cunha 
+                            no Youtube</p>
+                    </div>
+
+                    <div>
+                        <video width="320" height="180" controls="controls"
+                            src="../public/videos/"></video>
+                        <p>MAQUIAGEM NUVEM - Maquiagem Artística Fofa e Fácil de Fazer<br>
+                            Por Nay Firens 
+                            no Youtube</p>
+                    </div>
+
+                    <div>
+                        <video width="320" height="180" controls="controls"
+                            src="../public/videos/"></video>
+                        <p>Tutorial maquiagem artística fácil<br>
+                            Por Debora Freitas 
+                            no Youtube</p>
+                    </div>
+                </div>
+
+                <div class="intermediario" style="display: none;" id="intermediario">
+                    <div>
+                        <video width="320" height="180" controls="controls"
+                            src="../public/videos/"></video>
+                        <p>Maquiagem artística - Caveira e Maquiagem básica<br>
+                            Por Náyadi Calais 
+                            no Youtube</p>
+                    </div>
+
+                    <div>
+                        <video width="320" height="180" controls="controls"
+                            src="../public/videos/"></video>
+                        <p>MAKE Avatar - MAQUIAGEM ARTÍSTICA <br>
+                            Por Gabriela Bigai 
+                            no Youtube</p>
+                    </div>
+
+                    <div>
+                        <video width="320" height="180" controls="controls"
+                            src="../public/videos/"></video>
+                        <p>TUTORIAL MAQUIAGEM Borboleta<br>
+                            Por Camila Pereira 
+                            no Youtube</p>
+                    </div>
+
+                    <div>
+                        <video width="320" height="180" controls="controls"
+                            src="../public/videos/"></video>
+                        <p>Tutorial maquiagem artística passo a passo<br>
+                            Por Camillyrluz 
+                            no Youtube</p>
+                    </div>
+                </div>
+
+                <div class="avancado" style="display: none;" id="avancado">
+                    <div>
+                        <video width="320" height="180" controls="controls"
+                            src="../public/videos/"></video>
+                        <p>Maquiagem artística - Diabinha Glam<br>
+                            Por Karol Kaepistick 
+                            no Youtube</p></p>
+                    </div>
+
+                    <div>
+                        <video width="320" height="180" controls="controls"
+                            src="../public/videos/"></video>
+                        <p>MAKE Zumbi - MAQUIAGEM ARTÍSTICA <br>
+                            Por Karol Kaepistick 
+                            no Youtube</p></p>
+                    </div>
+
+                    <div>
+                        <video width="320" height="180" controls="controls"
+                            src="../public/videos/"></video>
+                        <p>Máscara de caveira ☠ - Maquiagem artística<br>
+                            Por Karol Kaepistick 
+                            no Youtube</p>
+                    </div>
+
+                    <div>
+                        <video width="320" height="180" controls="controls"
+                            src="../public/videos/"></video>
+                        <p>Tutorial maquiagem artística Metade queimada<br>
+                            Por Karol Kaepistick 
+                            no Youtube</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+
+    function limparSessao() {
+        sessionStorage.clear();
+        window.location = "./login.html";
+    }
+    function produtosNecessarios() {
+
+        let nivel = slct_niveis.value;
+        let soma = 0;
+
+        let slct_iniciante = iniciante;
+        let slct_intermediario = intermediario;
+        let slct_avancado = avancado;
+
+        let listaProdutos = ['Kit de pincéis', 'Kit tinta facial', 'Paleta de sombras coloridas', 'Pedrinhas de strass', 'Cílios Postíços (opcional)', 'Latex para próteses', 'Esponja de maquiagem (opicional)', 'Sangue falso', 'Corretivo (opicional)', 'Base (opicional)', 'Pó facial (opicional)'];
+        let listaPrecos = [15, 18, 20, 10, 20, 5, 15, 15, 15, 12];
+
+        if (nivel == '#') {
+            produtos.style.display = "block";
+            valores.innerHTML = `Escolha um nível por favor`;
+
+            slct_iniciante.style.display = "none";
+
+            slct_avancado.style.display = "none";
+
+            slct_intermediario.style.display = "none";
+
+        } else if (nivel == 'iniciante') {
+
+            slct_iniciante.style.display = "block";
+
+            produtos.style.display = "block";
+
+
+            valores.innerHTML = ` `;
+
+            valores.innerHTML += `<b>Produtos necessário: </b>`;
+
+            for (let cont = 0; cont < listaProdutos.length; cont++) {
+                if (cont == 0 || cont == 1 || cont == 2 || cont == 8 || cont == 9) {
+
+
+                    soma += Number(listaPrecos[cont]);
+
+                    valores.innerHTML += `<br>${listaProdutos[cont]}<br>`;
+                }
+            }
+
+            valores.innerHTML += ` <b>Média de valor a ser gasto: </b> R$${soma}`;
+
+        } else if (nivel == 'intermediario') {
+
+            slct_iniciante.style.display = "none";
+
+            slct_avancado.style.display = "none";
+
+            slct_intermediario.style.display = "block";
+
+            produtos.style.display = "block";
+
+            valores.innerHTML = ` `;
+
+            valores.innerHTML += `<b>Produtos necessários: </b>`;
+
+            for (let cont = 0; cont < listaProdutos.length; cont++) {
+                if (cont == 0 || cont == 1 || cont == 2 || cont == 3 || cont == 4 || cont == 8 || cont == 9) {
+
+
+                    soma += Number(listaPrecos[cont]);
+
+                    valores.innerHTML += `<br>${listaProdutos[cont]}<br>`;
+                }
+            }
+
+            valores.innerHTML += ` <b>Média de valor a ser gasto: </b> R$${soma}`;
+
+        } else if (nivel == 'avancado') {
+
+            slct_iniciante.style.display = "none";
+
+            slct_intermediario.style.display = "none";
+
+            slct_avancado.style.display = "block";
+
+            produtos.style.display = "block";
+
+            valores.innerHTML = ` `;
+
+            valores.innerHTML += `<b>Produtos necessários: </b>`;
+
+            for (let cont = 0; cont < listaProdutos.length; cont++) {
+                if (cont == 0 || cont == 1 || cont == 2 || cont == 4 || cont == 5 || cont == 6 || cont == 7 || cont == 8 || cont == 9) {
+
+
+                    soma += Number(listaPrecos[cont]);
+
+                    valores.innerHTML += `<br>${listaProdutos[cont]}<br>`;
+                }
+            }
+
+            valores.innerHTML += ` <b>Média de valor a ser gasto: </b> R$${soma}`;
+        }
+
+    }
+</script>
